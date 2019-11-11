@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>끝말잇기(컴포넌트 이용)</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- 내가 끝말잇기를 한페이지에 3개를 만들고 싶다면, 지금 만든 끝말잇기를 다 복사붙여넣기 해서 
+    만들어야 하는데, 코드가 지저분하고 data도 각각에 맞춰서 methods도 각각의 맞춰서 만들어줘야한다.(그냥 복사하면 데이터는 서로 공유하기 때문에) -->
+    <!-- 그래서 반복되는 부분을 컴포넌트로 만들게 되면 데이터나 메소드를 각각 다 만들어 줄 필요가 없다. -->
+    <div id="root">
+        <!-- 끝말잇기 3개 만들기 -->
+        <word-relay start-word ="제로초"></word-relay> <!--startWord는 Props -->
+        <word-relay start-word="초밥"></word-relay>
+        <word-relay start-word="바보"></word-relay>
+    </div>
+    <script>
+        // Vue 컴포넌트, 컴포넌트는 인스턴스보다 위에 있어야 함! 
+        Vue.component("word-relay", { // 전역(글로벌) 컴포넌트 
+            template: ` 
+                    <div>
+                    <div>{{ word }}</div>
+                    <form v-on:submit="onSubmitForm">
+                    <input type="text" v-model = "value" ref="answer">
+                    <button type="submit">입력!</button>
+                    </form>
+                    <div>{{result}}</div>
+                    </div>
+        `, // ES6는 '', "", `` 이렇게 3개가 문자열로 인식 / 컴포넌트의 템플릿은 최상위 부모가 있어야한다. 즉, 여러개의 태그를 하나의 태그로 다 감싸야 한다.
+        props: ['start-word'], // 달라지는 부분은 여기에 적으면 됨
+        data() { // 컴포넌트는 데이터를 함수로 만들어 줘야한다.
+            return {
+                word: this.startWord,
+                result: '',
+                value: '',
+            }    
+            },
+            methods: {
+                onSubmitForm(e) {
+                    e.preventDefault();
+                    if (this.word[this.word.length - 1] === this.value[0]) {
+                        this.result = '딩동댕';
+                        this.word = this.value;
+                        this.value = '';
+                        this.$refs.answer.focus();
+                    } else {
+                        this.result = '땡';
+                        this.value = '';
+                        this.$refs.answer.focus();
+                    }
+                }
+            },
+            }
+        );
+    </script>
+    <script>
+        // Vue 인스턴스
+        const app = new Vue({
+            el: "#root",
+        })
+    </script>
+</body>
+
+</html>

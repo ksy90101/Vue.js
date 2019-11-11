@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- jQuery 추가 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   
+</head>
+<body>
+<!-- JS 코드 -->
+<h5>- JavaScript 이용</h5>
+<div id = "app1">
+    <div></div>
+</div>
+<script>
+    // div안에 div에 Hello World
+    document.getElementById("app1").getElementsByTagName("div")[0].innerText = "Hello World";
+</script>
+<!-- jQuery 이용 -->
+<h5>- jQuery 이용</h5>
+<div id = "app2">
+    <div></div>
+</div>
+<script>
+    $("#app2 div:first-child")[0].innerText = "Hello World";
+</script>
+<!-- Vue.js 이용 -->
+<h5>- Vue.js 이용</h5>
+<div id = "app3">
+    <div>{{ message}}</div>
+</div>
+<script>
+    let vm = new Vue({
+        el:"#app3",
+        data:{
+            message:""
+        },
+        created() {
+            this.message = "Hello World";
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs4</title>
+    <!-- jQuery 추가 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <input type="text" name="ex" id="ex" v-model = "inputValue" v-on:keydown.enter="enterKeyPressed">
+        <!--
+        v-model : 양방향 데이터 바인딩으로 데이터에 있는 값이 뷰에 나타나고, 이 뷰의 값이 바뀌면 데이터의 값도 바뀌는 것
+        v-on : 이벤트 핸들링으로 이벤트를 발생시켜주는 디렉티브
+        v-on:keydown.enter :  엔터를 눌렀을때 반응하는 동작
+        cf) v-on:keyup.enter : 엔터를 눌렀때 뗄 때 반응하는 동작
+        -->
+        <p>{{ inputValue}}</p>
+    </div>
+
+    <script>
+        let vm = new Vue({ // vue 생성
+            el:"#app", // app이라는 id를 가진 element를 선택
+            data: { // inputValue라는 데이터 생성(변수)
+                inputValue:""
+            },
+            methods: { // 메소드 생성
+                enterKeyPressed(){ // alert창이 뜨는 메소드
+                    alert("입력이 완료되었습니다.");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

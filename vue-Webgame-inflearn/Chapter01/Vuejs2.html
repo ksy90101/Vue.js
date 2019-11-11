@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>구구단</title>
+        <!-- Vue.js 추가 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+      <div>{{ first }}곱하기 {{ second }}는?</div> <!--{{}} 이 안에는 자바스크립트를 쓸수 있다.(예를 들면 연산)-->
+    <form v-on:submit="onSubmitForm">
+        <input type="number" v-model="value" ref="answer"> <!-- v-model : input이랑 Vue Data를 연결해줌 -->
+        <!--ref : Vue가 부르는 이름을 설정-->
+        <button type="submit">입력</button>
+    </form>
+    <div id="result">{{ result }}</div>
+  </div>
+</body>
+<script>
+const app = new Vue({
+    el:"#root",
+    data:{ // 바뀌는 부분이 data가 된다.
+        first: Math.ceil(Math.random() * 9), // 첫번째 숫자
+        second: Math.ceil(Math.random() * 9), // 두번째 숫자
+        value:'', // 입력값
+        result:'', // 결과
+    },
+    methods: {
+        onSubmitForm(e) {
+            e.preventDefault(); // 페이지 새로고침을 막기 위함
+            if(this.first * this.second === parseInt(this.value)){
+                this.result = '정답';
+                this.first = Math.ceil(Math.random() * 9); // 두번째 숫자
+                this.second = Math.ceil(Math.random() * 9); // 두번째 숫자
+                this.value ='';
+                this.$refs.answer.focus(); // ref가 answer라는 이름을 가지고 있는 곳에 포커스를 두는 것 , ref를 남용하면 안됨.
+                // this.$refs.answer.value() = 123 값 자체를 변경해 버리면, data와 뷰에 입력된 값이랑 달라서 문제가 발생할수 있다.
+            } else{
+                this.result = '땡';
+                this.value ='';
+                this.$refs.answer.focus();
+            }
+        },
+    },
+});
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs11</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- component를 쓴 v-for -->
+    <div id="app">
+        <div v-for="post in posts" :key="post.idx"> <!-- v-for문을 사용-->
+            <!-- <blog-item v-bind:title="post.title" v-bind:description="post.description"></blog-item> -->
+            <blog-item v-bind:post="post"></blog-item> <!-- post라는 데이터를 바인딩-->
+        </div>
+    </div>
+    <script>
+        Vue.component("blog-item", { // 컴포넌트 생성(blog-item)
+            //template:'<div> <h3>{{  title  }}</h3> <p>{{  description  }}</p></div>',
+            template:`<div> <h3>{{  post.title  }}</h3> <p>{{  post.description  }}</p></div>`,
+            //props:["title", "description"]
+            props:["post"] // 상위 컴포넌트에서 하위 컴포넌트로 값을 전달하는 것
+        })
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                posts: [
+            {
+                idx: 1,
+                title: "Blog Post 1",
+                description: "Lorem Inpum 1"
+            },
+            {
+                idx: 2,
+                title: "Blog Post 2",
+                description: "Lorem Inpum 2"
+            },
+            {
+                idx: 3,
+                title: "Blog Post 3",
+                description: "Lorem Inpum 3"
+            }
+            ]
+        }
+    });
+    </script>
+</body>
+
+</html>

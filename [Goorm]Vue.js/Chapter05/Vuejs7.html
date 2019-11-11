@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs7</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id ="app">
+    <input type="text" name="ex" id="ex" v-model.lazy="inputValue1"> <!--.lazy : 커서(포커스)가 벗어나면 값에 넣기-->
+    <p>{{ inputValue1 }}</p>
+    <input type="text" name="ex" id="ex" v-model.trim="inputValue2"> <!-- whiteSpace 방지 -->
+    <p>{{ inputValue2 }}</p>
+    <select name="ex-sel" id="ex-sel" v-model="seelctValue">
+        <option value="hello">Hello</option>
+        <option value="world">World</option>
+    </select>
+</div>
+<script>
+    let vm = new Vue({ // Vue 생성
+        el:"#app", // app이라는 id를 가지고 있는 element 선택
+        data:{ // 변수(데이터) 선언
+            inputValue1:"", // v-model.lazy 예제 데이터
+            inputValue2:"", // v-model.trim 예제 데이터
+            seelctValue:null // select 예제 데이터
+        }
+    })
+</script>
+</body>
+</html>

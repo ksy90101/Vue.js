@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs9</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 컴포넌트의 특징은 똑같은 컴포넌트가 여러개 있어도 각각 인식하는것은 다름
+        (여기서는 버튼 클릭 횟수가 각 버튼만큼 횟수만 나옴.) -->
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <script>
+        Vue.component("button-counter", { // 컴포넌트 생성
+            template: `<button v-on:click="buttonClicked">You Clicked me {{ counter}} times!</button>`,
+            data: function() { // 데이터를 만들어 줌
+                return {
+                    counter:0 // cunter의 값은 0
+                }
+            },
+            methods: {
+                buttonClicked(){ // 버튼이 클릭되었을때 실행되는 메소드
+                    this.counter++; // counter에 1씩 더해라
+                }
+            }
+        })
+        let vm=new Vue({
+            el: "#app"
+        });
+    </script>
+</body>
+</html>

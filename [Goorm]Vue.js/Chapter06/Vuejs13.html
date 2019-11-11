@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs13</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<style>
+    .tab-button{
+        padding:6px 10px;
+        border-top-left-radius: 3px; /* border-radius : 테두리를 둥글게 만드는 속성 */
+        border-top-right-radius: 3px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        background: #f0f0f0;
+        margin-bottom: -1px;
+        margin-right: -1px;
+    }
+    .tab-button:hover { background: #e0e0e0; } /* 링크에 마우스 포인터를 올려 놓았을 때 */
+    .tab-button:active { background: #e0e0e0; } /* 링크를 마우스로 클릭한 순간 */
+    .tab{ border: 1px solid #ccc; padding: 10px; }
+</style>
+</head>
+<body>
+    <div id="app">
+        <button v-for="tab in tabs" v-bind:key="tab" v-bind:class="['tab-button', {active: currentTab == tab}]" v-on:click="currentTab = tab">{{ tab }}</button>
+        <!-- v-bind:class="{클래스명: 조건}" -->
+        <component v-bind:is="currentTabComponent" class="tab" :posts="posts" :post="posts[clickedPostNo]" v-on:post-clicked="postClicked"></component>    
+    </div>
+    <script>
+        Vue.component("blog-post",{
+            template: `<div v-on:click="$emit('post-clicked', post.id);">
+            <h3>{{ post.title}}</h3>
+            <p>{{ post.description}}</p>
+            </div>`,
+            props:["post"]
+        });
+
+        Vue.component("blog-list", {
+            template:`<div>
+            <blog-post v-for="post in posts" :key="post.id" :post="post" v-on:post-clicked="bubbleUpEvent"></blog-post></div>`,
+            props:["posts"],
+            methods:{
+                bubbleUpEvent(id){
+                    this.$emit('post-clicked', id);
+                }
+            }
+        });
+
+        Vue.component("blog-read", {
+            template:`<div>
+            <h1>{{ post.title}}</h1>
+            <p>{{ post.description}}</p>
+            </div>`,
+            props: ["post"]
+        })
+
+        Vue.component("blog-about", {
+            template:`<div>
+            <h3>My Blog</h3>
+            <p>My Awsome Blog!</p>
+            </div>`
+        })
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                posts: [
+            {
+                id: 0,
+                title: "Blog Post 1",
+                description: "Lorem Inpum 1"
+            },
+            {
+                id: 1,
+                title: "Blog Post 2",
+                description: "Lorem Inpum 2"
+            },
+            {
+                id: 2,
+                title: "Blog Post 3",
+                description: "Lorem Inpum 3"
+            }
+            ],
+            Clicked:false,
+            clickedPostNo:0,
+            tabs:["List", "Read", "About"],
+            currentTab: "List"
+        },
+        methods:{
+            postClicked(id){
+                this.currentTab=this.tabs[1];
+                this.clickedPostNo=id;
+            }
+            },
+            created(){
+                this.currentTab=this.tabs[this.clickedPostNo];
+            },
+        computed: {
+            currentTabComponent: function(){
+              return "blog-"+this.currentTab.toLowerCase(); // toLowerCase() : 문자열을 소문자로 변환해서 반환
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

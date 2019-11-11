@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs12</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if="isClicked">Post #{{ clickedPostId}} has been clicked!</p> <!-- 클릭했을때만 뜨게 함-->
+        <div v-for="post in posts" :key="post.idx">
+            <blog-item v-bind:post="post" v-on:button-clicked="itemClicked"></blog-item>
+        </div>
+    </div>
+    <script>
+        Vue.component("blog-item", { // 컴포넌트 생성
+            template:'<div v-on:click="itemClicked"> <h3>{{  post.title  }}</h3> <p>{{  post.description  }}</p></div>',
+            props:["post"],
+            methods: {
+                itemClicked() { // 메소드 생성
+                    this.$emit("button-clicked", this.post.id) // button-clicked라는 이벤트에 값 보내기
+                }
+            },
+            });
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                posts: [
+            {
+                id: 1,
+                title: "Blog Post 1",
+                description: "Lorem Inpum 1"
+            },
+            {
+                id: 2,
+                title: "Blog Post 2",
+                description: "Lorem Inpum 2"
+            },
+            {
+                id: 3,
+                title: "Blog Post 3",
+                description: "Lorem Inpum 3"
+            }
+            ],
+            isClicked:false,
+            clickedPostId:0
+        },
+        methods:{
+            itemClicked(id){
+                this.isClicked=true; // 버튼클릭하면 true
+                this.clickedPostId=id; // 클릭한 번호(id)
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

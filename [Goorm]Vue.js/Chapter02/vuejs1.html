@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- jQuery 추가 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- JS 이용 -->
+    <h5>- JavaScript 이용</h5>
+    <div id = "app1"></div>
+    <script>
+        document.getElementById("app1").innerText = "Hello World"; // ID가 app인 곳에 Helloworld를 넣어라
+    </script>
+    <!-- jQuery 이용 -->
+    <h5>- jQuery 이용</h5>
+    <div id = "app2"></div>
+    <script>
+        $("#app2")[0].innerText = "Hello World" // jQuery 문법
+    </script>
+    <!-- Vue.js 이용 -->
+    <h5>- Vue.js 이용</h5>
+    <div id = "app3">{{ message}}</div>
+    <script>
+        let vm = new Vue({
+            el:'#app3',
+            data:{
+                message:''
+            },
+            created() {
+                this.message = 'Hello World';
+            }
+        });
+    </script>
+</body>
+</html>

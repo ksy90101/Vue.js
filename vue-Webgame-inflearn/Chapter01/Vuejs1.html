@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>좋아요</title>
+        <!-- Vue.js 추가 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div v-if="liked">좋아요 눌렀음</div> <!--조건식 = liked의 값에 따라 표현-->
+        <button v-else v-on:click="onClickButton">Like</button> <!--methods를 가지고 있음, 조건식 = 위의 조건식 따라감-->
+    </div>
+</body>
+<script>
+    const app = new Vue({
+        el: "#root", // Vue가 id root를 통제할 수 있도록 하는 것
+        data:{ // 데이터가 바뀌면 자동으로 View를 수정해주기 때문에 편함 / 즉, 데이터 관리가 제일 중요
+            liked:false,
+        },methods: {
+            onClickButton(){
+                this.liked = true;
+            }
+        },
+    });
+</script>
+</html>

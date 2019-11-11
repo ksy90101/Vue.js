@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs6</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+     <div id="app">
+         <p v-if="isNotClicked">Not Clicked!</p> <!--클릭이 없으면 이 p 태그 표시-->
+         <p v-else-if="lessThanClicks">Clicked {{ clicks }} times!</p> <!--클리이 10번 이하면 이 p 태그 표시-->
+         <p v-else>Too many Clicks!</p> <!-- 클릭이 10번 초과되면 이 p 태그 표시-->
+         <button v-on:click = "clickedHandler">Click Me!</button> <!-- 이 버튼을 클릭할때 마다 clicks 변수의 값이 1씩 올라감-->
+         <!-- v-on은 이벤트 핸들러로 click하면 메소드(이벤트)를 실행하는 것-->
+     </div>
+     <script>
+         let vm=new Vue({ // Vue 생성
+             el:"#app", // app이라는 id를 가지고 있는 element 설정
+             data:{
+                 clicks:0 // clicks이라는 변수 및 데이터 선언
+             },
+             methods: { // 메소드 선언
+                 clickedHandler(){ // 버튼을 클릭시 clicks이 1씩 증가
+                     this.clicks++;
+                 }
+             },
+             computed: { // computed 선언
+                 isNotClicked : function(){ // clicks이 0인 경우
+                     return this.clicks==0;
+                 },
+                 lessThanClicks : function(){ // clicks가 10번 이하인 경우
+                    return this.clicks<=10;
+                 }
+             }
+         })
+     </script>
+</body>
+</html>

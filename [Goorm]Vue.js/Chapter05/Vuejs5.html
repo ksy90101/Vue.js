@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs5</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id = "app">
+    <ul>
+        <li v-for="(item, index) in items" :key="index">{{item }}</li>
+        <!-- 
+            v-for : 배열을 기반으로 리스트를 렌더링 할수 있음
+            item in itmes 형태로 특별한 문법이 필요
+            여기서 items은 원본 데이터 배열, itme은 반복 배열 엘리먼트 별칭
+            :key : 개별 DOM 노드들을 추적하고 기존 엘리먼트를 재사용, 재정렬하기 위해서 v-for의 각 항목들에 고유한 key 속성을 제공해야 함.
+        -->
+    </ul>
+</div>
+<script>
+    let vm = new Vue({ // Vue 생성 
+        el:"#app", // app이라는 id를 가지고 있는 element 선택
+        data: { // 데이터(변수) 설정
+            items:["Hello","Vue","from","ruto"] // items라는 배열 설정
+        }
+    })
+</script>
+</body>
+</html>

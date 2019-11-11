@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuejs8</title>
+    <!-- Vue.js 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id ="app">
+    <p v-on:copy.prevent="isCopied">중요한 정보(복사 X)</p>
+    <!-- v-on:copy.prevent : copy의 이벤트를 막으라는 의미(즉, 복사가 안되게 설정) -->
+</div>
+<script>
+    let vm = new Vue({ // Vue 생성
+        el:"#app", // app이라는 id를 가지고 있는 element 선택
+        methods: { // 메소드 선언
+            isCopied(){ // 복사하려고 하면 alert창 뜨게 함.
+                alert("저작권법 위반입니다.");
+            }
+        },
+    })
+</script>
+</body>
+</html>
