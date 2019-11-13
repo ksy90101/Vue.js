@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>가위바위보</title>
+</head>
+<body>
+    <!-- vue이름을 두단어 이상으로 적으라고 공식문서에 적혀있음
+        webpack-dev-server를 사용하면 app.js가 보여지지가 않음. 그 이유는 웹팩 데브서버는 output를 파일로 만들어서
+        저장하는게 아니라 메모리에 저장하기 때문에 눈에 보이지 않음
+        꼭 publicPath를 적어줘야 webpack-dev-server가 제대로 작동함.(app.js를 적음)
+    -->
+    <div id="root"></div>
+    <script src="./dist/app.js"></script>
+</body>
+</html>
