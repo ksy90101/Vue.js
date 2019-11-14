@@ -10,7 +10,7 @@
         </form>
         <div>시도 : {{tries.length}}</div> <!-- 배열 길이 -->
         <ul>
-            <li v-for="t in tries"> <!--배열의 값들을 표현하기 위해 v-for(반복문) 사용 -->
+            <li v-for="t in tries" :key="t.try"> <!--배열의 값들을 표현하기 위해 v-for(반복문) 사용 -->
                 <div>{{t.try}}</div>
                 <div>{{t.result}}</div>
                 </li>
